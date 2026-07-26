@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@theme {
+  /* === COLORS === */
+  --color-background: #18101f;
+  --color-on-background: #edddf4;
+  --color-surface: #18101f;
+  --color-on-surface: #edddf4;
+  --color-surface-dim: #18101f;
+  --color-surface-bright: #403547;
+  --color-surface-container-lowest: #130b1a;
+  --color-surface-container-low: #211828;
+  --color-surface-container: #251c2c;
+  --color-surface-container-high: #302637;
+  --color-surface-container-highest: #3b3142;
+  --color-surface-variant: #3b3142;
+  --color-surface-tint: #4ae176;
+
+  --color-primary: #4be277;
+  --color-primary-fixed: #6bff8f;
+  --color-primary-fixed-dim: #4ae176;
+  --color-primary-container: #22c55e;
+  --color-on-primary: #003915;
+  --color-on-primary-fixed: #002109;
+  --color-on-primary-fixed-variant: #005321;
+  --color-on-primary-container: #004b1e;
+  --color-inverse-primary: #006e2f;
+
+  --color-secondary: #d3bbff;
+  --color-secondary-fixed: #ebddff;
+  --color-secondary-fixed-dim: #d3bbff;
+  --color-secondary-container: #5d03ca;
+  --color-on-secondary: #3f008d;
+  --color-on-secondary-fixed: #250059;
+  --color-on-secondary-fixed-variant: #5b00c5;
+  --color-on-secondary-container: #c7aaff;
+
+  --color-tertiary: #deb8ff;
+  --color-tertiary-fixed: #f0dbff;
+  --color-tertiary-fixed-dim: #ddb7ff;
+  --color-tertiary-container: #cb94ff;
+  --color-on-tertiary: #490080;
+  --color-on-tertiary-fixed: #2c0051;
+  --color-on-tertiary-fixed-variant: #6900b3;
+  --color-on-tertiary-container: #5f00a3;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+
+  --color-outline: #869585;
+  --color-outline-variant: #3d4a3d;
+  --color-inverse-surface: #edddf4;
+  --color-inverse-on-surface: #362d3e;
+  --color-on-surface-variant: #bccbb9;
+
+  /* === SPACING === */
+  --spacing-base: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-gutter: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 48px;
+
+  /* === FONT FAMILIES === */
+  --font-headline-lg: "Montserrat", sans-serif;
+  --font-headline-lg-mobile: "Montserrat", sans-serif;
+  --font-headline-md: "Montserrat", sans-serif;
+  --font-headline-sm: "Montserrat", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-label-md: "JetBrains Mono", monospace;
+  --font-label-sm: "JetBrains Mono", monospace;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* === FONT SIZES === */
+  --text-headline-lg: 48px;
+  --text-headline-lg-mobile: 32px;
+  --text-headline-md: 32px;
+  --text-headline-sm: 24px;
+  --text-body-lg: 18px;
+  --text-body-md: 16px;
+  --text-label-md: 14px;
+  --text-label-sm: 12px;
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(37, 28, 44, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-panel {
+  background: rgba(37, 28, 44, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-input {
+  background: rgba(59, 49, 66, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-input:focus-within {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px #22c55e, 0 0 10px rgba(34, 197, 94, 0.2);
+}
+
+/* Glow border gradient overlay */
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(211,187,255,0.1) 100%);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Text glow */
+.text-glow-primary {
+  text-shadow: 0 0 10px rgba(75, 226, 119, 0.5);
+}
+.text-glow-secondary {
+  text-shadow: 0 0 10px rgba(211, 187, 255, 0.4);
+}
+.neon-text {
+  text-shadow: 0 0 10px rgba(75, 226, 119, 0.5);
+}
+
+/* Grid background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Custom range input */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #22c55e;
+  cursor: pointer;
+  margin-top: -7px;
+  box-shadow: 0 0 10px #22c55e;
+  transition: box-shadow 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 18px #22c55e;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #130b1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b3142;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4be277;
+}
+
+/* Fix: Tailwind v4 uses --spacing-* for max-w-* when spacing names match container names.
+   Restore correct container widths so max-w-md, max-w-xl, etc. work as expected. */
+@layer utilities {
+  .max-w-xs  { max-width: 20rem; }
+  .max-w-sm  { max-width: 24rem; }
+  .max-w-md  { max-width: 28rem; }
+  .max-w-lg  { max-width: 32rem; }
+  .max-w-xl  { max-width: 36rem; }
+  .max-w-2xl { max-width: 42rem; }
+  .max-w-3xl { max-width: 48rem; }
+  .max-w-4xl { max-width: 56rem; }
+  .max-w-5xl { max-width: 64rem; }
+}
+
+/* Select styling */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23bccbb9'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  -webkit-appearance: none;
+}

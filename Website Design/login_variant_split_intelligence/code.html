@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AIVenture - Sign In / Sign Up</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#006e2f",
+                        "tertiary": "#deb8ff",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "tertiary-fixed": "#f0dbff",
+                        "secondary-fixed": "#ebddff",
+                        "outline": "#869585",
+                        "surface-container": "#251c2c",
+                        "primary-fixed": "#6bff8f",
+                        "on-primary-container": "#004b1e",
+                        "surface-container-lowest": "#130b1a",
+                        "error-container": "#93000a",
+                        "surface-dim": "#18101f",
+                        "surface-container-highest": "#3b3142",
+                        "background": "#18101f",
+                        "tertiary-container": "#cb94ff",
+                        "surface-container-low": "#211828",
+                        "secondary": "#d3bbff",
+                        "surface-tint": "#4ae176",
+                        "primary": "#4be277",
+                        "surface-variant": "#3b3142",
+                        "primary-fixed-dim": "#4ae176",
+                        "on-secondary-container": "#c7aaff",
+                        "surface-bright": "#403547",
+                        "on-primary-fixed": "#002109",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5b00c5",
+                        "on-tertiary": "#490080",
+                        "secondary-container": "#5d03ca",
+                        "on-secondary": "#3f008d",
+                        "inverse-surface": "#edddf4",
+                        "on-surface-variant": "#bccbb9",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "on-surface": "#edddf4",
+                        "on-tertiary-fixed": "#2c0051",
+                        "on-tertiary-container": "#5f00a3",
+                        "outline-variant": "#3d4a3d",
+                        "surface-container-high": "#302637",
+                        "on-background": "#edddf4",
+                        "inverse-on-surface": "#362d3e",
+                        "surface": "#18101f",
+                        "on-secondary-fixed": "#250059",
+                        "primary-container": "#22c55e",
+                        "on-primary": "#003915",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#005321",
+                        "secondary-fixed-dim": "#d3bbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "sm": "16px",
+                        "margin-desktop": "48px",
+                        "xl": "64px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "lg": "40px",
+                        "xs": "8px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono", "monospace"],
+                        "label-md": ["JetBrains Mono", "monospace"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-sm": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "fontWeight": "500", "letterSpacing": "0.05em" }],
+                        "label-md": ["13px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(33, 24, 40, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        .glow-border:focus-within {
+            border-color: #22C55E;
+            box-shadow: 0 0 0 1px #22C55E, 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+
+        .tab-btn {
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            border-bottom-color: #4be277;
+            color: #edddf4;
+        }
+
+        .tab-btn:not(.active) {
+            color: #bccbb9;
+        }
+        
+        .tab-btn:not(.active):hover {
+            color: #edddf4;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md m-0 p-0 flex">
+<div class="flex w-full min-h-screen">
+<!-- Left Column: Hero Image (Hidden on small screens) -->
+<div class="hidden lg:flex lg:w-1/2 relative bg-surface-container-lowest overflow-hidden items-center justify-center">
+<!-- Background Image -->
+<img alt="Abstract representation of global venture data and AI intelligence" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrYAmR0WVSET9vUKi_Cz-80UKsNxDqxN5jo20NAMcKhvcB2kiF9OXL25BbXhdiSqKGOsFKQDK0fel_t2QAdcyjZLmXXKZw3RycnwC2SMnKqAeMuDv5kDZmakC4selw6erjrIXvrDwq4nqdOprbcWr8EnPftS8DwEroQjr-3BuAulXyPwfRhtzT0umLICaeP1ZpTeOgWX1HlF7I1fBx-IE08sm_rcvR0quZHgfV1kEahyjJ7EWCcug9YMqDlQY8fjHxeN1eRcpa9o"/>
+<!-- Overlay Gradient -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-background"></div>
+<!-- Content Overlay -->
+<div class="relative z-10 p-margin-desktop max-w-xl self-end mb-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-sm text-primary font-label-sm uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    System Online
+                </div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-sm">
+                    Global Venture Intelligence
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Deploy capital with unmatched precision. Leverage real-time predictive analytics and proprietary deal flow models.
+                </p>
+</div>
+</div>
+<!-- Right Column: Auth Forms -->
+<div class="w-full lg:w-1/2 flex items-center justify-center p-sm md:p-margin-desktop bg-background relative overflow-hidden">
+<!-- Subtle background effect -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="w-full max-w-md relative z-10">
+<!-- Brand Header (Mobile Only) -->
+<div class="text-center mb-lg lg:hidden">
+<h1 class="font-headline-lg text-headline-lg-mobile text-primary tracking-tight">
+                        AIVenture
+                    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-base">
+                        Global Venture Intelligence
+                    </p>
+</div>
+<!-- Brand Name (Desktop) -->
+<div class="hidden lg:block mb-xl">
+<h2 class="font-headline-md text-headline-md text-primary">AIVenture.</h2>
+</div>
+<div class="glass-card rounded-xl p-md md:p-lg">
+<!-- Tabs -->
+<div class="flex border-b border-white/10 mb-md">
+<button class="tab-btn active flex-1 py-sm font-label-md uppercase tracking-wider text-center cursor-pointer" id="tab-signin" onclick="switchTab('signin')">
+                            Authenticate
+                        </button>
+<button class="tab-btn flex-1 py-sm font-label-md uppercase tracking-wider text-center cursor-pointer" id="tab-signup" onclick="switchTab('signup')">
+                            Request Access
+                        </button>
+</div>
+<!-- Sign In Form -->
+<div class="form-section active" id="form-signin">
+<div class="mb-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">System Access</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Authenticate to access real-time global deal flow.</p>
+</div>
+<form class="space-y-sm">
+<div class="glow-border rounded-lg bg-surface-container-highest transition-all duration-300">
+<label class="sr-only" for="signin-email">Work Email</label>
+<div class="relative flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-sm">mail</span>
+<input class="w-full bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder:text-on-surface-variant/50 p-0 h-10" id="signin-email" placeholder="Work Email" type="email"/>
+</div>
+</div>
+<div class="glow-border rounded-lg bg-surface-container-highest transition-all duration-300">
+<label class="sr-only" for="signin-password">Security Key</label>
+<div class="relative flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-sm">lock</span>
+<input class="w-full bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder:text-on-surface-variant/50 p-0 h-10" id="signin-password" placeholder="Security Key" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between mt-sm">
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="rounded bg-surface-container-highest border-white/20 text-primary focus:ring-primary/50 focus:ring-offset-background group-hover:border-primary/50 transition-colors" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">PERSIST_SESSION</span>
+</label>
+<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">RESET_CREDENTIALS</a>
+</div>
+<button class="w-full mt-md bg-primary-container text-on-primary-container font-label-md text-label-md py-sm rounded-lg hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-all duration-300 uppercase tracking-widest" type="button">
+                                Initialize Session
+                            </button>
+</form>
+<div class="mt-lg relative">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-white/10"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-2 bg-surface-container-low text-on-surface-variant font-label-sm uppercase tracking-wider">Alternate Protocols</span>
+</div>
+</div>
+<div class="mt-md space-y-sm">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" type="button">
+<img alt="Google" class="w-4 h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFSXXk83ACHZsFdYdb1zP58LiKowvOt67OtVCG4DjvVTaBtTI9GGg8iIgyFdZWTfXT4zMgx-U8z7JngsqDIqtfkQLlC1MMJj0tcYV5FlYqMSS26PWJcxTEcRzo6qhYE1ARP2Uw0o2JmBCZCHfXK914PeF0HoMMO2LDRyvnSFuiVA_bHE1M1_CU6343U9LVbuZ5CTsoFDLSsGr6vYlrlwC_GBFhYjhJZywUpHytCDqMM1niNX5m6YoFMiiisCK0zwmNW8b7DlXTOj4"/>
+<span class="font-label-md text-label-md text-on-surface uppercase">Google OAuth</span>
+</button>
+<button class="w-full flex items-center justify-center gap-sm py-sm px-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" type="button">
+<span class="material-symbols-outlined text-on-surface text-base">vpn_key</span>
+<span class="font-label-md text-label-md text-on-surface uppercase">Enterprise SSO</span>
+</button>
+</div>
+</div>
+<!-- Sign Up Form -->
+<div class="form-section" id="form-signup">
+<div class="mb-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Authorization Request</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Request clearance for proprietary market data integration.</p>
+</div>
+<form class="space-y-sm">
+<div class="glow-border rounded-lg bg-surface-container-highest transition-all duration-300">
+<label class="sr-only" for="signup-name">Full Name</label>
+<div class="relative flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-sm">person</span>
+<input class="w-full bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder:text-on-surface-variant/50 p-0 h-10" id="signup-name" placeholder="Full Name" type="text"/>
+</div>
+</div>
+<div class="glow-border rounded-lg bg-surface-container-highest transition-all duration-300">
+<label class="sr-only" for="signup-email">Work Email</label>
+<div class="relative flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-sm">mail</span>
+<input class="w-full bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder:text-on-surface-variant/50 p-0 h-10" id="signup-email" placeholder="Corporate Email" type="email"/>
+</div>
+</div>
+<div class="glow-border rounded-lg bg-surface-container-highest transition-all duration-300">
+<label class="sr-only" for="signup-company">Firm Name</label>
+<div class="relative flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-sm">domain</span>
+<input class="w-full bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder:text-on-surface-variant/50 p-0 h-10" id="signup-company" placeholder="Fund / Entity Name" type="text"/>
+</div>
+</div>
+<div class="glow-border rounded-lg bg-surface-container-highest transition-all duration-300">
+<label class="sr-only" for="signup-aum">AUM (Optional)</label>
+<div class="relative flex items-center px-sm py-xs">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-sm">monitoring</span>
+<input class="w-full bg-transparent border-none text-on-surface focus:ring-0 font-body-md text-body-md placeholder:text-on-surface-variant/50 p-0 h-10" id="signup-aum" placeholder="Assets Under Management (Optional)" type="text"/>
+</div>
+</div>
+<button class="w-full mt-md bg-transparent border border-secondary text-secondary font-label-md text-label-md py-sm rounded-lg hover:bg-secondary/10 hover:shadow-[0_0_15px_rgba(211,187,255,0.2)] transition-all duration-300 uppercase tracking-widest" type="button">
+                                Submit Request
+                            </button>
+<p class="font-label-sm text-on-surface-variant text-center mt-md opacity-70">
+                                By submitting, you consent to our <a class="text-secondary hover:underline underline-offset-2" href="#">DATA_POLICY</a> and <a class="text-secondary hover:underline underline-offset-2" href="#">TOS</a>.
+                            </p>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        function switchTab(tabId) {
+            // Update buttons
+            document.getElementById('tab-signin').classList.remove('active');
+            document.getElementById('tab-signup').classList.remove('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            // Update forms
+            document.getElementById('form-signin').classList.remove('active');
+            document.getElementById('form-signup').classList.remove('active');
+            document.getElementById('form-' + tabId).classList.add('active');
+        }
+    </script>
+</body></html>

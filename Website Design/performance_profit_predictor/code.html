@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AIVenture - Performance Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#22c55e",
+                        "surface": "#18101f",
+                        "primary-fixed-dim": "#4ae176",
+                        "on-surface": "#edddf4",
+                        "on-secondary-fixed-variant": "#5b00c5",
+                        "secondary-fixed-dim": "#d3bbff",
+                        "surface-container": "#251c2c",
+                        "on-primary-container": "#004b1e",
+                        "on-error": "#690005",
+                        "on-primary": "#003915",
+                        "surface-container-lowest": "#130b1a",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#edddf4",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#4ae176",
+                        "primary": "#4be277",
+                        "background": "#18101f",
+                        "tertiary-fixed": "#f0dbff",
+                        "secondary-container": "#5d03ca",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "on-secondary": "#3f008d",
+                        "on-tertiary": "#490080",
+                        "primary-fixed": "#6bff8f",
+                        "surface-container-low": "#211828",
+                        "surface-container-highest": "#3b3142",
+                        "outline": "#869585",
+                        "on-primary-fixed": "#002109",
+                        "secondary-fixed": "#ebddff",
+                        "outline-variant": "#3d4a3d",
+                        "on-surface-variant": "#bccbb9",
+                        "tertiary": "#deb8ff",
+                        "on-tertiary-container": "#5f00a3",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#edddf4",
+                        "tertiary-container": "#cb94ff",
+                        "secondary": "#d3bbff",
+                        "inverse-primary": "#006e2f",
+                        "surface-container-high": "#302637",
+                        "surface-bright": "#403547",
+                        "inverse-on-surface": "#362d3e",
+                        "surface-dim": "#18101f",
+                        "on-secondary-container": "#c7aaff",
+                        "on-secondary-fixed": "#250059",
+                        "on-tertiary-fixed": "#2c0051",
+                        "on-primary-fixed-variant": "#005321",
+                        "surface-variant": "#3b3142"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "gutter": "24px",
+                        "xs": "8px",
+                        "margin-desktop": "48px",
+                        "lg": "40px",
+                        "base": "4px",
+                        "sm": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(37, 28, 44, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(211,187,255,0.1) 100%);
+            border-radius: inherit;
+            z-index: -1;
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(75, 226, 119, 0.5);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #22c55e;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px #22c55e;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-margin-desktop h-16 bg-surface/80 backdrop-blur-md dark:bg-surface/80 border-b border-white/10 dark:border-outline-variant/30 shadow-sm w-full">
+<div class="flex items-center gap-sm">
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">AIVenture</span>
+</div>
+<div class="flex items-center gap-md">
+<nav class="hidden md:flex items-center gap-md">
+<!-- Since we have SideNav, we'll keep TopNav actions minimal -->
+</nav>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full text-on-surface-variant dark:text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant dark:text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<img alt="Investor profile avatar" class="w-8 h-8 rounded-full border border-primary/30 object-cover" data-alt="A futuristic, high-resolution portrait of a professional investor avatar, illuminated by soft emerald and violet neon rim lighting against a deep obsidian background. The styling is sleek and high-tech." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA86bKNn4s_sndA_25KvGWPuDmJjb3DUD_0eb6TUkmrZOWaCiVNfnUAKAWYZmntmWA46-dEvNwQLrOG76CV0UM65jgt8Qze7x_bbrK6GcYDx_9bUvQcLyE9IkskebmFNXy40iooTwwLWRSCUcobE8_oUHkePTF68w-aBY6FL4-ZAkWRxKpEMSwyvKSc77VSEKuOvEmBmfeGBaP487ZbWyqfNDky9qxP99SY_gYGnCuEXdk49vrBUg9lLCHpW_8BYtWzRgk-PhwA-Xg"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-surface-container dark:bg-surface-container-lowest backdrop-blur-xl border-r border-white/10 shadow-lg shadow-primary/5 z-40 pb-sm">
+<div class="p-md flex flex-col gap-base border-b border-white/5">
+<h2 class="font-headline-md text-headline-md text-primary">Capital Command</h2>
+<span class="font-body-md text-body-md text-on-surface-variant">Venture Partner</span>
+</div>
+<nav class="flex-1 flex flex-col gap-xs py-sm px-xs overflow-y-auto">
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant/80 dark:text-on-surface-variant/60 hover:bg-surface-container-high transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg bg-secondary-container/20 text-primary dark:text-primary-fixed border-r-4 border-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md font-bold">Performance</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant/80 dark:text-on-surface-variant/60 hover:bg-surface-container-high transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Guide</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant/80 dark:text-on-surface-variant/60 hover:bg-surface-container-high transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<div class="p-sm mt-auto">
+<button class="w-full py-2 px-4 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-shadow duration-300 mb-sm">
+                    Discover Startups
+                </button>
+<div class="flex flex-col gap-xs border-t border-white/5 pt-sm">
+<a class="flex items-center gap-sm px-sm py-1.5 rounded-lg text-on-surface-variant/80 hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span class="font-label-sm text-label-sm">About Us</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-1.5 rounded-lg text-on-surface-variant/80 hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 p-margin-mobile md:p-margin-desktop w-full overflow-y-auto">
+<!-- Hero Section / Portfolio Growth -->
+<section class="mb-xl">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-md">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Performance Analytics</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Real-time portfolio synthesis and predictive modeling.</p>
+</div>
+<div class="mt-sm md:mt-0 glass-panel px-md py-xs rounded-full flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary">Live Data Sync Active</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Key Metric 1 -->
+<div class="glass-panel glow-border rounded-xl p-md flex flex-col justify-between h-40">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total AUM</span>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">$2.4B</div>
+<div class="flex items-center gap-xs text-primary mt-base">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+14.2% YTD</span>
+</div>
+</div>
+</div>
+<!-- Key Metric 2 -->
+<div class="glass-panel glow-border rounded-xl p-md flex flex-col justify-between h-40">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Deals</span>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface">127</div>
+<div class="flex items-center gap-xs text-secondary mt-base">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+<span class="font-label-sm text-label-sm">Stable</span>
+</div>
+</div>
+</div>
+<!-- Key Metric 3 -->
+<div class="glass-panel glow-border rounded-xl p-md flex flex-col justify-between h-40">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Projected Yield</span>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface neon-text">24.8%</div>
+<div class="flex items-center gap-xs text-primary mt-base">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span class="font-label-sm text-label-sm">High Confidence</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Profit Prediction Simulator -->
+<section class="mb-xl">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary text-2xl">science</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Profit Prediction Simulator</h2>
+</div>
+<div class="glass-panel glow-border rounded-xl p-md md:p-lg grid grid-cols-1 lg:grid-cols-2 gap-xl">
+<!-- Controls -->
+<div class="flex flex-col gap-md">
+<div class="space-y-sm">
+<label class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Marketing Cost (Monthly)</span>
+<span class="text-secondary" id="mkt-val">$50,000</span>
+</label>
+<input class="w-full" max="200000" min="10000" oninput="document.getElementById('mkt-val').innerText = '$' + Number(this.value).toLocaleString()" step="5000" type="range" value="50000"/>
+</div>
+<div class="space-y-sm">
+<label class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>R&amp;D Cost (Monthly)</span>
+<span class="text-secondary" id="rnd-val">$120,000</span>
+</label>
+<input class="w-full" max="500000" min="20000" oninput="document.getElementById('rnd-val').innerText = '$' + Number(this.value).toLocaleString()" step="10000" type="range" value="120000"/>
+</div>
+<div class="space-y-sm">
+<label class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Administration Cost (Monthly)</span>
+<span class="text-secondary" id="admin-val">$30,000</span>
+</label>
+<input class="w-full" max="100000" min="10000" oninput="document.getElementById('admin-val').innerText = '$' + Number(this.value).toLocaleString()" step="1000" type="range" value="30000"/>
+</div>
+<div class="space-y-xs mt-sm">
+<label class="font-label-md text-label-md text-on-surface block">Company Location Hub</label>
+<select class="w-full bg-surface-container-high border border-outline-variant rounded-lg p-3 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none">
+<option value="sf">San Francisco, CA</option>
+<option value="ny">New York, NY</option>
+<option value="ldn">London, UK</option>
+<option value="sg">Singapore</option>
+</select>
+</div>
+<button class="mt-sm w-full py-3 px-4 rounded-lg bg-surface/50 border border-white/20 text-on-surface font-label-md text-label-md hover:bg-white/10 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+                            Recalculate Model
+                        </button>
+</div>
+<!-- Output Visualization -->
+<div class="relative bg-surface-container-lowest rounded-xl border border-white/5 p-md flex flex-col justify-center items-center overflow-hidden min-h-[300px]">
+<!-- Abstract decorative background for the viz -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 50% 50%, rgba(34,197,94,0.3) 0%, transparent 70%);"></div>
+<div class="z-10 text-center flex flex-col items-center">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-sm">Predicted Monthly Profit</span>
+<!-- Dynamic Metric -->
+<div class="relative">
+<span class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary neon-text flex items-baseline gap-xs">
+                                    $485,200
+                                </span>
+<!-- Simulated graph line behind text -->
+<svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-24 opacity-30 pointer-events-none" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,25 C20,25 30,10 50,15 C70,20 80,5 100,2" fill="none" stroke="#22c55e" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+<path d="M0,25 C20,25 30,10 50,15 C70,20 80,5 100,2 L100,30 L0,30 Z" fill="url(#grad)" stroke="none"></path>
+<defs>
+<lineargradient id="grad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#22c55e" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#22c55e" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="mt-md flex items-center gap-sm bg-surface/80 rounded-full px-sm py-1 border border-primary/20 backdrop-blur-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Model Confidence: <strong class="text-on-surface">94%</strong></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>
